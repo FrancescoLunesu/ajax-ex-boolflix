@@ -31,6 +31,7 @@ $(document).ready(function(){
         var ricerca = $("#search").val();
         console.log(ricerca);
         ricercaFilm(ricerca);
+        ricercaSerieTv(ricerca);
         // ad ogni click "svuoto" il mio ul in modo tale che mi cancelli eventuali risultati dati in precedenza
     $("#n").empty();
 
@@ -55,7 +56,7 @@ function ricercaFilm(query){
                             // se la chiamata dell'API restituisce uno o più risultato allora richiamo la funzione film() altrimenti la funzione nessunRisultato
                             film(risposta.results);
                         } else {
-                            nessunRisultato();
+                            nessunRisultatoFilm();
                         }
 
                     },
@@ -65,12 +66,38 @@ function ricercaFilm(query){
             })
         }
 
+function ricercaSerieTv(query){
+            $.ajax(
+                    {
+                        url: "https://api.themoviedb.org/3/search/tv",
+                        method: "GET",
+                        data:{
+                            api_key: "edf3f73f0278fbd70155fcad20871afb",
+                            language: "it-IT",
+                            query: query
+                        },
+                        success: function(risposta){
+                            if(risposta.total_results > 0){
+                                // se la chiamata dell'API restituisce uno o più risultato allora richiamo la funzione film() altrimenti la funzione nessunRisultato
+                                serieTv(risposta.results);
+                            } else {
+                                nessunRisultatoSerieTv();
+                            }
+
+                        },
+                        error: function(){
+                            alert("Attenzione! Si è verificato un errore");
+                        }
+                })
+            };
+
 // FUNZIONE NESSUN RISULTATO trovato
 
-    function nessunRisultato(){
-        alert("Nessun risultato trovato");
-    }
+    function nessunRisultatoFilm(){
+        $("p.j").append("Non è stato trovato nessun film con questo nome")
+    };
 
+// FUNZIONE FILM
     function film(data){
         for (var i = 0; i < data.length; i++){
             var source = document.getElementById("entry-template").innerHTML;
@@ -85,7 +112,29 @@ function ricercaFilm(query){
             $("#n").append(html);
 
         }
+    };
+
+
+// FUNZIONE SERIE TV
+function serieTv(data){
+    for (var i = 0; i < data.length; i++){
+        var source = document.getElementById("entry-template").innerHTML;
+        var template = Handlebars.compile(source);
+        var context = {
+            title: data[i].name,
+            original_tirle: data[i].original_name,
+            original_language: bandiera(data[i].original_language),
+            vote_average: rate(data[i].vote_average),
+        };
+        var html = template(context);
+        $("#n").append(html);
+
     }
+};
+
+function nessunRisultatoSerieTv(){
+    $("p.j").append("Non è stata trovata nessuna serie TV con questo nome")
+};
 
     // creo una funzione per trasformare il voto da 1 a 10 decimale in voto da 1 a 5 interno
     function rate(numero){
