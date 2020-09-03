@@ -16,41 +16,64 @@ $(document).ready(function(){
     $("button").click(function(){
         var ricerca = $("#search").val();
         console.log(ricerca);
+        ricercaFilm(ricerca);
         // ad ogni click "svuoto" il mio ul in modo tale che mi cancelli eventuali risultati dati in precedenza
     $("#n").empty();
 
-        $.ajax(
-            {
-                url: "https://api.themoviedb.org/3/search/movie",
-                method: "GET",
-                data:{
-                    api_key: "edf3f73f0278fbd70155fcad20871afb",
-                    language: "it-IT",
-                    query: ricerca
-                },
-                success: function(risposta){
-                    // avevo scordato una "i" nelle condizioni del ciclo for e continuava ad andare in loop bloccando la pagina
-                    for (var i = 0; i < risposta.results.length; i++){
-                        var source = document.getElementById("entry-template").innerHTML;
-                        var template = Handlebars.compile(source);
 
 
-                        var context = {
-                            title: risposta.results[i].title,
-                            original_title: risposta.results[i].original_title,
-                            original_language: risposta.results[i].original_language,
-                            vote_average: risposta.results[i].vote_average
-                        };
-                        var html = template(context);
-                        $("#n").append(html);
+// FUNZIONI
+// funzione di chiamata all'API e ricerca film
+function ricercaFilm(query){
+            $.ajax(
+                {
+                    url: "https://api.themoviedb.org/3/search/movie",
+                    method: "GET",
+                    data:{
+                        api_key: "edf3f73f0278fbd70155fcad20871afb",
+                        language: "it-IT",
+                        query: query
+                    },
+                    success: function(risposta){
+                        if(risposta.total_results > 0){
+                            // se la chiamata dell'API restituisce uno o più risultato allora richiamo la funzione film() altrimenti la funzione nessunRisultato
+                            film(risposta);
+                        } else {
+                            nessunRisultato();
+                        }
 
+                    },
+                    error: function(){
+                        alert("Attenzione! Si è verificato un errore");
                     }
+            })
+        }
 
-                },
-                error: function(){
-                    alert("Attenzione! Si è verificato un errore");
-                }
-        })
+// FUNZIONE NESSUN RISULTATO trovato
+
+    function nessunRisultato(){
+        alert("Nessun risultato trovato");
+    }
+
+    function film(risposta){
+        for (var i = 0; i < risposta.results.length; i++){
+            var source = document.getElementById("entry-template").innerHTML;
+            var template = Handlebars.compile(source);
+
+
+            var context = {
+                title: risposta.results[i].title,
+                original_title: risposta.results[i].original_title,
+                original_language: risposta.results[i].original_language,
+                vote_average: risposta.results[i].vote_average
+            };
+            var html = template(context);
+            $("#n").append(html);
+
+        }
+    }
+
 
     });
+
 });
