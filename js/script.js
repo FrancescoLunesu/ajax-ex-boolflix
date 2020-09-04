@@ -34,6 +34,7 @@ $(document).ready(function(){
         ricercaSerieTv(ricerca);
         // ad ogni click "svuoto" il mio ul in modo tale che mi cancelli eventuali risultati dati in precedenza
     $("#n").empty();
+    $(".j").empty();
 
     });
 
@@ -107,6 +108,7 @@ function ricercaSerieTv(query){
                 original_title: data[i].original_title,
                 original_language: bandiera(data[i].original_language),
                 vote_average: rate(data[i].vote_average),
+                poster_path: data[i].poster_path
             };
             var html = template(context);
             $("#n").append(html);
@@ -125,6 +127,7 @@ function serieTv(data){
             original_tirle: data[i].original_name,
             original_language: bandiera(data[i].original_language),
             vote_average: rate(data[i].vote_average),
+            poster_path: data[i].poster_path,
         };
         var html = template(context);
         $("#n").append(html);
@@ -165,8 +168,5 @@ function nessunRisultatoSerieTv(){
         };
         return band;
     };
-
-
-
 
 });

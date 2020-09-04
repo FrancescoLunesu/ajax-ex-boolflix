@@ -9,14 +9,18 @@
         <title>BoolFlix</title>
     </head>
     <body>
-<!-- creazione container che conterrà il sito -->
-    <div class="container-risultati container">
-        <!-- creazione search bar (input + button) -->
-        <div class="search-bar">
+<!-- creazione container sito -->
+
+<header class="header">
+    <div class="search-bar">
         <input id="search">
         <button>Cerca</button>
-        </div>
+    </div>
+</header>
+        <!-- creazione search bar (input + button) -->
+
         <!-- all'interno di questo div, dentro l'ul, verrano incollati i risultati della ricerca API -->
+    <div class="container-risultati container">
         <div class="r">
             <ul id="n">
 
@@ -24,11 +28,10 @@
             <p class="j"></p>
         </div>
     </div>
-
-
 <!-- template handlebars -->
     <script id="entry-template" type="text/x-handlebars-template">
       <li>
+          <img src="https://image.tmdb.org/t/p/w185{{{poster_path}}}" alt="">
           <h1 class="titolo">{{title}}</h1>
           <h2 class="titolo originale">{{original_title}}</h2>
           <p class="lingua">{{{original_language}}}</p>
