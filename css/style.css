@@ -1,5 +1,53 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-/*  */
+body{
+    font-family: 'Roboto', sans-serif;
+    background-color: #708090;
+}
+
+header.header{
+    width: 100%;
+    background-color: #282828;
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1{
+    color: #B22222;
+    font-size: 40px;
+}
+
+.search-bar #search, button{
+    border-radius: 5px;
+    padding: 3px;
+}
+
+.container{
+    max-width: 80%;
+    width: 80%;
+    margin: 50px auto;
+    background-color: lightgray;
+}
+
+#n{
+    display: flex;
+    list-style: none;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+#n li{
+}
+
+
+
+/* css stelle e bandiere */
 .stella{
     color: yellow;
 }
