@@ -11,38 +11,44 @@
     </head>
     <body>
 <!-- creazione container sito -->
-
-<header class="header">
-    <div class="logo">
-        <h1>BOOLFLIX</h1>
-    </div>
-    <div class="search-bar">
-        <input id="search">
-        <button>Cerca</button>
-    </div>
-</header>
+    <div class="bg">
+        <header class="header">
+            <div class="logo">
+                <h1>BOOLFLIX</h1>
+            </div>
+            <div class="search-bar">
+                <input id="search">
+                <button>Cerca</button>
+            </div>
+        </header>
         <!-- creazione search bar (input + button) -->
 
         <!-- all'interno di questo div, dentro l'ul, verrano incollati i risultati della ricerca API -->
-    <div class="container-risultati container">
+        <div class="container-risultati container">
 
-            <ul id="n">
+                <ul id="n">
 
-            </ul>
-            <!-- <p class="j"></p> -->
+                </ul>
+                <!-- <p class="j"></p> -->
 
-    </div>
+        </div>
 <!-- template handlebars -->
     <script id="entry-template" type="text/x-handlebars-template">
       <li>
-          <img src="https://image.tmdb.org/t/p/w185{{{poster_path}}}" alt="">
-          <h3 class="titolo">{{title}}</h1>
-          <h4 class="titolo originale">{{original_title}}</h2>
-          <p class="lingua">{{{original_language}}}</p>
-          <p class="voto">{{{vote_average}}}</p>
+        <div class="immagini">
+            <img src="https://image.tmdb.org/t/p/w300{{{poster_path}}}" alt="">
+        </div>
+        <div class="overlay">
+            <h3 class="titolo"><span>Titolo: </span>{{title}}</h1>
+            <h4 class="titolo originale"><span>Titolo Originale: </span>{{original_title}}</h2>
+            <p class="trama"><span>Trama: </span>{{overview}}[...]</p>
+            <p class="lingua"><span>Lingua: </span>{{{original_language}}}</p>
+            <p class="voto"><span>Voto: </span>{{{vote_average}}}</p>
+        </div>
       </li>
     </script>
 
-    <script src="js/script.js" charset="utf-8"></script>
+            <script src="js/script.js" charset="utf-8"></script>
+        </div>
     </body>
 </html>

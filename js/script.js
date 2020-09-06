@@ -106,6 +106,7 @@ function ricercaSerieTv(query){
             var context = {
                 title: data[i].title,
                 original_title: data[i].original_title,
+                overview: data[i].overview.substring(0, 150),
                 original_language: bandiera(data[i].original_language),
                 vote_average: rate(data[i].vote_average),
                 poster_path: data[i].poster_path
@@ -125,6 +126,7 @@ function serieTv(data){
         var context = {
             title: data[i].name,
             original_tirle: data[i].original_name,
+            overview: data[i].overview.substring(0, 150),
             original_language: bandiera(data[i].original_language),
             vote_average: rate(data[i].vote_average),
             poster_path: data[i].poster_path,
@@ -160,9 +162,9 @@ function nessunRisultatoSerieTv(){
     function bandiera(flag){
         var band = "";
         if (flag == "it"){
-            band += '<img class="bandiere" src="img/it.svg" alt="ita">';
+            band += '<img class="bandiere" src="img/it.png" alt="ita">';
         } else if (flag == "en"){
-            band += '<img class="bandiere" src="img/en.svg" alt="eng">';
+            band += '<img src="img/en.png" alt="eng">';
         } else {
             band = flag;
         };
