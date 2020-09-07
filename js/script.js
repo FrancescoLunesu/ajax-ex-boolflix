@@ -2,7 +2,6 @@ $(document).ready(function(){
     // al click del bottone memorizzo nella variabile ricerca il valore dell'input con id "search"
     $("button").click(function(){
         var ricerca = $("#search").val();
-        console.log(ricerca);
         ricercaFilm(ricerca);
         ricercaSerieTv(ricerca);
         // ad ogni click "svuoto" il mio ul in modo tale che mi cancelli eventuali risultati dati in precedenza
