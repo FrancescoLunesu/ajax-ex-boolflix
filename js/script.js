@@ -1,30 +1,30 @@
 $(document).ready(function(){
     // al click del bottone memorizzo nella variabile ricerca il valore dell'input con id "search"
     $("button").click(function(){
-        var ricerca = $("#search").val();
-        ricercaFilm(ricerca);
-        ricercaSerieTv(ricerca);
-        // ad ogni click "svuoto" il mio ul in modo tale che mi cancelli eventuali risultati dati in precedenza
-    $("#n").empty();
-    $(".j").empty();
+        ricerca();
 
     });
 
     //premendo il tasto invio memorizzio faccio in modo che vengano richiamate le funzioni per la ricerca dei film o serie TV
     $('input').keyup(function(e){
         if(e.keyCode == 13){
-            var ricerca = $("#search").val();
-            ricercaFilm(ricerca);
-            ricercaSerieTv(ricerca);
+            ricerca();
         };
-
-        $("#n").empty();
-        $(".j").empty();
     });
 
 
 
 // FUNZIONI
+
+function ricerca(){
+    var ricerca = $("#search").val();
+    $("#n").empty();
+    $(".j").empty();
+    ricercaFilm(ricerca);
+    ricercaSerieTv(ricerca);
+    // ad ogni click "svuoto" il mio ul in modo tale che mi cancelli eventuali risultati dati in precedenza
+}
+
 // funzione di chiamata all'API e ricerca film
 function ricercaFilm(query){
             $.ajax(
